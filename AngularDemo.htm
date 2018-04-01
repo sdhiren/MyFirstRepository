@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My First Angular App</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"> </script>
+ <script type="text/javascript">
+ 	
+ 	//var app = angular.module("demoModule", []).run( ["$rootScope",function($rootScope){
+ 		
+ 	//	$rootScope.Admin = "Night King";
+
+ 	//}]); 
+
+ 	var app = angular.module("demoModule", []).service('sharedVariable',function(){
+ 		
+ 		var Country = "India";
+ 		
+ 			return {
+ 				getProperty : function(){
+ 				return Country;
+
+ 			},
+ 			 setProperty : function(value){
+ 				Country = value;
+ 			}
+ 		}
+ 	});
+
+ 	app.controller( "demo",["$scope","sharedVariable", function($scope,sharedVariable) {
+ 		$scope.name = "Dhiren";
+ 		$scope.age = 28;
+ 		$scope.emailId = "singh.dhirendra07@gmail.com";
+ 		$scope.ParentName="demo";
+ 		//sharedVariable.setProperty="India";
+ 		$scope.CountryName = sharedVariable.getProperty();
+ 		//$rootScope.$apply();
+
+ 	}]);
+
+ 	app.controller( "demo2",["$scope", function($scope){
+ 		$scope.name = "Jon";
+ 		$scope.age = 25;
+ 		$scope.emailId = "jon.snow@gmail.com";
+ 		//sharedVariable.setProperty("India"); 
+ 	}]);
+
+ 	app.controller("test", ["$scope", "$rootScope", "sharedVariable", function($scope, $rootScope, sharedVariable){
+
+ 		$scope.changeCountry = function(a){
+ 			sharedVariable.setProperty = a;
+ 			//$rootScope.$apply();
+ 		};
+ 		$scope.textValue = sharedVariable.getProperty();
+
+
+ 		$scope.CountryList = [
+ 								{
+ 									ID:1,
+ 									Name:"India"
+ 								},
+ 								{
+ 									ID:2,
+ 									Name:"US"
+ 								},
+ 								{
+ 									ID:3,
+ 									Name:"UK"
+ 								},
+ 								{
+ 									ID:4,
+ 									Name:"Italy"
+ 								}
+ 							];
+ 	}]);
+
+ </script>
+</head>
+<body ng-app = "demoModule">
+
+<div ng-controller="test">
+
+	Select Country:
+
+	<select onchange="changeCountry()">
+		<option value = "0" label = "Please Select" >Please Select</option>
+		<option ng-repeat="country in CountryList" value = "{{country.ID}}">{{country.Name}}</option>
+    </select>
+
+</div>
+
+</br>
+</br>
+
+
+<div ng-controller = "demo">
+	Hello {{name}}!! Your age is {{age}} and emailId is {{emailId}}. 
+	</br>
+	I am from = <label ng-model="CountryName"> {{CountryName}} </label>
+</br>
+</br>
+
+<div ng-controller="demo2">
+		Hello {{name}}!! Your age is {{age}} and emailId is {{emailId}}. 
+	</br>
+		I am from = {{CountryName}}
+		</br>
+		Parent Name = {{ParentName}}
+</div>
+
+</div>
+
+</br>
+</br>
+
+
+<div ng-controller="test">
+	<input type="text" name="Name" ng-model="textValue" >
+	<button ng-click="changeCountry(textValue)">Submit</button>
+</div>
+
+</br>
+</br>
+
+
+
+
+</body>
+</html>
