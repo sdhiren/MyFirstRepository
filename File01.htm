@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My First Angular App</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"> </script>
+ <script type="text/javascript">
+ 	
+ 	//var app = angular.module("demoModule", []).run( ["$rootScope",function($rootScope){
+ 		
+ 	//	$rootScope.Admin = "Night King";
+
+ 	//}]); 
+
+ 	var app = angular.module("demoModule", []);
+
+ 	app.controller("test",["$log","$scope","factoryService",function($log,$scope,factoryService){
+
+ 		$scope.a=10;
+ 		$scope.b=20;
+
+ 		$scope.DoSum = function(){
+ 				
+ 			factoryService.CalSum($scope.a,$scope.b,function(result){
+ 				$scope.sum = result;
+ 			});
+
+ 		};
+
+ 	}]);
+
+ 	app.factory('factoryService',['$http','$log',function($http,$log){
+
+ 		var factoryObj= {};
+
+ 		factoryObj.CalSum= function(a,b,callback){
+
+ 				// $http({
+ 				// 	url: '',
+ 				// 	method: 'GET'
+ 				// }).then (function(resp){
+ 				// 	callback(resp.data);
+ 				// },function(resp){
+ 				// 	$log.error(resp.data);	
+ 				// }); 				
+ 					var s = parseInt(a)+parseInt(b);
+ 					callback(s);
+ 			
+ 		};
+ 		return factoryObj;
+
+ 	}]);
+
+ </script>
+</head>
+<body ng-app = "demoModule">
+
+<div ng-controller = "test">
+
+Value of a = {{a}}
+</br>
+Value of b = {{b}}
+</br>
+Change value of a to <input type="text" ng-model = "a" name="text1">
+Change value of b to <input type="text" ng-model = "b" name="text2">
+</br>
+ Sum = {{sum}}
+</br>
+<button ng-click="DoSum()" >Calculate Sum</button>
+
+</div>
+
+</body>
+</html>
