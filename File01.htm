@@ -58,6 +58,12 @@ Change value of b to <input type="text" ng-model = "b" name="text2">
  Sum = {{sum}}
 </br>
 <button ng-click="DoSum()" >Calculate Sum</button>
+</br>
+
+<span ng-if="sum>1000" > Sum is greater than 1000 </span>
+</br>
+<span ng-show="sum>1000" > Sum is greater than 1000 </span>
+
 
 </div>
 
