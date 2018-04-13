@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My First Angular App</title>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"> </script>
+ <script type="text/javascript" src="Directives.js">
+ </script>
+</head>
+<body ng-app = "demoModule">
+
+<div ng-controller = "test">
+
+<!-- Value of a = {{a}}
+</br>
+Value of b = {{b}}
+</br>
+Change value of a to <input type="text" ng-model = "a" name="text1">
+Change value of b to <input type="text" ng-model = "b" name="text2">
+</br>
+ Sum = {{sum}}
+</br>
+<button ng-click="DoSum()" >Calculate Sum</button>
+</br>
+
+<span ng-if="sum>1000" > Sum is greater than 1000 </span>
+</br>
+<span ng-show="sum>1000" > Sum is greater than 1000 </span>
+ -->
+
+<div my-first-directive text="first">
+	<div my-first-directive text="second">
+		<div my-first-directive text="third">
+		</div>
+	</div>
+</div>
+
+</div>
+
+</body>
+</html>
